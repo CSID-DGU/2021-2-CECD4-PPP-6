@@ -2,7 +2,7 @@
 #define CHECKTHREAD_H
 
 //
-// 스레드 검사
+// 检测线程
 //
 
 #include <QMap>
@@ -17,47 +17,47 @@ class CheckThread : public QThread {
         CheckThread(QObject *parent = nullptr);
         ~CheckThread();
 
-        // 로그인 패스위드
+        // 添加开机密码
         void addPassword(QString password) {
             _password = password;
         }
 
-        // 검사객체 추가
+        // 添加检测对象
         void addCheckList(QList<CheckType> typeList);
 
     signals:
-        // 검사 끝 발송
+        // 发送检测结束
         void sendFinish();
 
-        // 검사 결과 발송
+        // 发送检测结果
         void sendCheckResult(CheckType type, CheckLevel level);
 
     protected:
-        // 스레드 실행
+        // 执行线程
         void run();
 
     private:
-        // 숫자
+        // 是否包含数字，纯数字
         bool _isContainsNum(QString str, bool &isAll);
 
-        // 문자
+        // 纯字母
         bool _isContainsLetter(QString str, bool &isAll);
 
-        // 특수문자
+        // 是否包含特殊字符
         bool _isContainsSpecialChar(QString str, bool &isAll);
 
-        // 패스워드 안전도 검사
+        // 账户密码安全检测
         void _checkUserInfor();
 
-        // 화면 보호
+        // 屏幕保护检测
         void _checkScreenSaver();
 
-        // 공유보안
+        //文件共享检测
         void _checkFileSharing();
 
     private:
-        QString _password;                            // 패스워드
-        QQueue<CheckType> _checkQueue;                // 검사 줄
+        QString _password;                            // 开机密码
+        QQueue<CheckType> _checkQueue;                // 检测队列
 };
 
 #endif // CHECKTHREAD_H

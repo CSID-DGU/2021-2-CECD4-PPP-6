@@ -3,7 +3,10 @@
 
 #include "TableWidget.h"
 
-
+/////////////////////////////////////////////////////////////////////////////////////
+// 构造函数
+// 默认 : 10行 2列
+/////////////////////////////////////////////////////////////////////////////////////
 TableWidget::TableWidget(QWidget *parent)
     : QTableWidget(10, 2, parent)
 {
@@ -11,25 +14,37 @@ TableWidget::TableWidget(QWidget *parent)
     _checkLevelMap.clear();
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+// 析构函数
+/////////////////////////////////////////////////////////////////////////////////////
 TableWidget::~TableWidget() {
     _checkNumMap.clear();
     _checkLevelMap.clear();
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+// 添加表头
+/////////////////////////////////////////////////////////////////////////////////////
 void TableWidget::addHeadList(QList<QString> &headList) {
     _initTable(headList);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+// 添加检测队列
+/////////////////////////////////////////////////////////////////////////////////////
 void TableWidget::addCheckList(QMap<CheckType, QString> &checkList) {
     if (checkList.isEmpty()) {
         return;
     }
 
+    // 清除表格内容
     clearContents();
 
+    // 插入数据
     int rows = rowCount();
     int count = checkList.count();
     for(int row = 0; row < count; row++) {
+        // 插入数据数大于初始化行数，新插入一行
         if (row >= rows) {
             insertRow(row);
         }
@@ -44,6 +59,9 @@ void TableWidget::addCheckList(QMap<CheckType, QString> &checkList) {
     }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+// 更新表格数据
+/////////////////////////////////////////////////////////////////////////////////////
 void TableWidget::updateTable(CheckType type, CheckLevel level) {
     _checkLevelMap.insert(type, level);
 
@@ -77,27 +95,38 @@ void TableWidget::updateTable(CheckType type, CheckLevel level) {
     tableItem->setTextColor(QColor(Qt::white));
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+// 初始化表格
+/////////////////////////////////////////////////////////////////////////////////////
 void TableWidget::_initTable(QList<QString> &headList) {
     if (headList.isEmpty()) {
         return;
     }
 
+    // 添加表头
     int columns = headList.count();
     setColumnCount(columns);
     setHorizontalHeaderLabels(headList);
 
+    // 设置不可编辑
     setEditTriggers(NoEditTriggers);
 
+    // 设置表头宽度
     horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     setColumnWidth(1, 120);
 
+    // 设置垂直表头隐藏
     verticalHeader()->setVisible(false);
 
+    // 表头加粗
     QFont font = this->horizontalHeader()->font();
     font.setBold(true);
     horizontalHeader()->setFont(font);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+// 插入单元格数据
+/////////////////////////////////////////////////////////////////////////////////////
 void TableWidget::_insertItem(int row, int column, QString value) {
     QTableWidgetItem *tableItem = item(row, column);
     if (nullptr == tableItem) {

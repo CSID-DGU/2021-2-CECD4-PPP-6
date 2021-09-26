@@ -48,29 +48,29 @@ class MainWindow : public QWidget
         void _initCheck();
 
     private:
-        unsigned int _count;
-        QString _password;
-        QString _userModifyInfo;
-        QString _screenModifyInfo;
+        unsigned int _count;                    // 当前计时
+        QString _password;                      // 密码
+        QString _userModifyInfo;                // 用户修改提示信息
+        QString _screenModifyInfo;              // 屏保修改提示信息
         QString _fileSharingInfo;
         QString _MicrophoneInfo;
-        QLabel *_lineLabel;
-        QLabel *_tipLineLabel;
-        QLabel *_timeLabel;
-        QLabel *_totalLabel;
-        QLabel *_titleLabel;
-        QLabel *_countTimeLabel;
+        QLabel *_lineLabel;                     // 横线标签
+        QLabel *_tipLineLabel;                  // 提示横线标签
+        QLabel *_timeLabel;                     // 当前时间标签
+        QLabel *_totalLabel;                    // 总分标签
+        QLabel *_titleLabel;                    // 标题标签
+        QLabel *_countTimeLabel;                // 计时标签
 
-        QPushButton *_startButton;
+        QPushButton *_startButton;              // 开始按键
 
-        QTimer *_timer;
-        TableWidget *_table;
-        ComponentWidget *_userCompone;
-        ComponentWidget *_screenCompone;
-        ComponentWidget *_fileCompone;
-        ComponentWidget *_microphone;
+        QTimer *_timer;                         // 定时器
+        TableWidget *_table;                    // 表格
+        ComponentWidget *_userCompone;          // 用户组件
+        ComponentWidget *_screenCompone;        // 屏幕组件
+        ComponentWidget *_fileCompone;          // 文件共享
+        ComponentWidget *_microphone;           // 麦克分使用
 
-        CheckThread *_thread;
-        QMap<CheckType, QString> _checkMap;
+        CheckThread *_thread;                   // 检测线程
+        QMap<CheckType, QString> _checkMap;     // 检测项映射表
 };
 #endif // MAINWINDOW_H

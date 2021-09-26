@@ -19,30 +19,38 @@ class LoginWidget : public QWidget {
         ~LoginWidget();
 
     protected:
-
+        // 鼠标移动事件
         void mouseMoveEvent(QMouseEvent *e);
 
+        // 鼠标按下事件
         void mousePressEvent(QMouseEvent *e);
 
+        // 鼠标释放事件
         void mouseReleaseEvent(QMouseEvent *e);
 
     private slots:
+        // 响应登陆按键
         void _onLoginBtnClicked();
 
     private:
+        // 初始化样式
         void _initStyle();
+
+        // 初始化字体
         void _initFont();
+
+        // QString 转wchar_t
         const wchar_t *_stringToWChar(QString str);
 
     private:
-        bool _isPressed;
-        QPoint _movePoint;
-        QPushButton *_loginBtn;
-        QPushButton *_closeBtn;
-        QLineEdit *_usernameEdit;
-        QLineEdit *_passwordEdit;
+        bool _isPressed;                          // 是否按键
+        QPoint _movePoint;                        // 窗体移动坐标点
+        QPushButton *_loginBtn;                   // 登陆按键
+        QPushButton *_closeBtn;                   // 关闭按键
+        QLineEdit *_usernameEdit;                 // 用户名编辑框
+        QLineEdit *_passwordEdit;                 // 密码编辑框
 
-        MainWindow *_mainWindow;
+        MainWindow *_mainWindow;                  // 主窗体
 };
 
 #endif // LOGINWIDGET_H
