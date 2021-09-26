@@ -152,11 +152,11 @@ void CheckThread::_checkFileSharing() {
 
     bool isShare = true;
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, TEXT("SYSTEM\\ControlSet001\\Services\\LanmanServer\\Shares"), 0, KEY_READ, &file) == ERROR_SUCCESS){
-            TCHAR valueName[MAX_PATH] = { 0 }; // 키 이름 저장
-            DWORD length = MAX_PATH;           // 리턴된 문자열 길이 저장
-            BYTE keyData[MAX_PATH] = { 0 };    // 키의 값 저장
-            DWORD lengthData = MAX_PATH;       // 값의 길이 저장
-            DWORD dwType = REG_SZ;	           // 키의 타입
+            TCHAR valueName[MAX_PATH] = { 0 }; 
+            DWORD length = MAX_PATH;           
+            BYTE keyData[MAX_PATH] = { 0 };   
+            DWORD lengthData = MAX_PATH;      
+            DWORD dwType = REG_SZ;	           
             while (RegEnumValue(file, dwIndex, valueName, &length, 0, &dwType, keyData, &lengthData) == ERROR_SUCCESS){
                 dwIndex++;
                 length = MAX_PATH;
