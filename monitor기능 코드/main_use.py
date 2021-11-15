@@ -136,7 +136,7 @@ class mainUI(QMainWindow):
                 self.statuslabel.setText("감시중...")
                 QTimer.singleShot(50,self.detect_mouth)
             else:
-                self.msgBox("camera open failed, please check cam id")
+                self.msgBox("마이크 문제 생겼습니다 다시 체크해 주세요!")
 
         else:
             cv2.destroyAllWindows()
